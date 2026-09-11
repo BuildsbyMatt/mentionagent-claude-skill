@@ -1,0 +1,14 @@
+{
+  "name": "mentionagent-claude-skill",
+  "owner": { "name": "MentionAgent", "url": "https://mentionagent.ai" },
+  "metadata": { "description": "MentionAgent link building outreach for Claude Code" },
+  "plugins": [
+    {
+      "name": "mentionagent",
+      "source": "./",
+      "description": "Review MentionAgent outreach drafts, send the batch, answer publisher replies and close placements from Claude Code.",
+      "version": "1.0.0",
+      "category": "seo"
+    }
+  ]
+}

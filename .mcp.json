@@ -1,0 +1,9 @@
+{
+  "mcpServers": {
+    "mentionagent": {
+      "type": "http",
+      "url": "https://mentionagent.ai/mcp",
+      "headers": { "Authorization": "Bearer ${MENTIONAGENT_API_KEY}" }
+    }
+  }
+}

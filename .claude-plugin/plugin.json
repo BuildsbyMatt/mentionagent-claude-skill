@@ -1,0 +1,10 @@
+{
+  "name": "mentionagent",
+  "version": "1.0.0",
+  "description": "Link building outreach from Claude Code: review MentionAgent's drafts, send the batch, answer publisher replies and close placements without opening the dashboard.",
+  "author": { "name": "MentionAgent", "url": "https://mentionagent.ai" },
+  "homepage": "https://mentionagent.ai/claude-seo-skill/",
+  "repository": "https://github.com/BuildsbyMatt/mentionagent-claude-skill",
+  "license": "MIT",
+  "keywords": ["seo", "link-building", "outreach", "backlinks", "mcp"]
+}
