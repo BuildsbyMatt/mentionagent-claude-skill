@@ -2,7 +2,7 @@
 
 A Claude Code plugin (and a standalone Agent Skill) that runs [MentionAgent](https://mentionagent.ai) link building outreach from your agent: review the drafts it wrote, send the batch, answer the publishers who replied, and close placements, without opening the dashboard.
 
-It wraps the MentionAgent MCP server (`https://mentionagent.ai/mcp`, 20 tools) with a skill that knows the daily loop, which two tools send real email, which two spend credits, and where to stop and ask you.
+It wraps the MentionAgent MCP server (`https://mentionagent.ai/mcp`, 21 tools) with a skill that knows the daily loop, which two tools send real email, which two spend credits, and where to stop and ask you.
 
 Works in Claude Code, Cursor, Windsurf, or any MCP client that can set a request header.
 
