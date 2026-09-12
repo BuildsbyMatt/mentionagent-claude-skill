@@ -30,6 +30,28 @@ export MENTIONAGENT_API_KEY=ma_live_...
 
 The plugin's `.mcp.json` reads `${MENTIONAGENT_API_KEY}`, so the key never lands in a file. Keys are created in the MentionAgent dashboard under Settings, Agent access, and are shown once.
 
+## Install in Cursor
+
+Cursor reads Agent Skills from `.cursor/skills/` (project) or `~/.cursor/skills/` (global), and also from `.claude/skills/` for compatibility. Copy the skill folder in, then add the server to `.cursor/mcp.json`:
+
+```
+mkdir -p .cursor/skills
+cp -r skills/link-building-outreach .cursor/skills/
+```
+
+```json
+{
+  "mcpServers": {
+    "mentionagent": {
+      "url": "https://mentionagent.ai/mcp",
+      "headers": { "Authorization": "Bearer ${env:MENTIONAGENT_API_KEY}" }
+    }
+  }
+}
+```
+
+Type `/link-building-outreach` in the Agent chat to invoke it. Full walkthrough: https://mentionagent.ai/cursor-seo-skill/
+
 ## Install the skill on its own
 
 Copy `skills/link-building-outreach/` into `~/.claude/skills/` (personal) or `.claude/skills/` in a project, then connect the MCP server yourself:
