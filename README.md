@@ -54,18 +54,19 @@ Type `/link-building-outreach` in the Agent chat to invoke it. Full walkthrough:
 
 ## Install in OpenClaw
 
-OpenClaw reads Agent Skills from `<workspace>/skills/` and `~/.agents/skills/` (the `SKILL.md` can sit up to six folders deep). Copy the folder in, then register the server with the OpenClaw MCP client:
+OpenClaw reads Agent Skills from `<workspace>/skills/` and `~/.agents/skills/` (the `SKILL.md` can sit up to six folders deep). Install the folder, register the server, sign in with OAuth (a browser window opens on the MentionAgent consent page), then probe:
 
 ```
-cp -r skills/link-building-outreach ~/.openclaw/workspace/skills/
+openclaw skills install ./skills/link-building-outreach
 openclaw mcp add mentionagent \
   --url https://mentionagent.ai/mcp \
   --transport streamable-http \
-  --header "Authorization: Bearer ma_live_..."
-openclaw mcp doctor mentionagent --probe
+  --auth oauth --no-probe
+openclaw mcp login mentionagent
+openclaw mcp probe mentionagent
 ```
 
-`doctor` will flag the literal token; move it into OpenClaw's secret store if the Gateway is shared. The skill answers to `/link-building-outreach` in any connected channel. Full walkthrough: https://mentionagent.ai/openclaw-seo-skill/
+To use an API key instead of OAuth, drop `--auth oauth` and pass `--header "Authorization=Bearer ma_live_..."` (the flag takes `KEY=VALUE`; a colon is rejected). `openclaw mcp doctor` will then flag the literal token, which is the reason to prefer OAuth on a shared Gateway. The skill answers to `/link-building-outreach` in any connected channel. Full walkthrough: https://mentionagent.ai/openclaw-seo-skill/
 
 ## Install the skill on its own
 

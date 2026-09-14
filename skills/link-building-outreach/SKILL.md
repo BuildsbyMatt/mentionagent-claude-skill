@@ -37,12 +37,20 @@ claude mcp add --transport http mentionagent https://mentionagent.ai/mcp \
   --header "Authorization: Bearer MY_KEY"
 ```
 
-OpenClaw:
+OpenClaw, OAuth (`login` opens the consent page in a browser):
 
 ```
 openclaw mcp add mentionagent --url https://mentionagent.ai/mcp \
-  --transport streamable-http --header "Authorization: Bearer MY_KEY"
-openclaw mcp doctor mentionagent --probe
+  --transport streamable-http --auth oauth --no-probe
+openclaw mcp login mentionagent
+openclaw mcp probe mentionagent
+```
+
+OpenClaw, API key (the header flag takes `KEY=VALUE`):
+
+```
+openclaw mcp add mentionagent --url https://mentionagent.ai/mcp \
+  --transport streamable-http --header "Authorization=Bearer MY_KEY"
 ```
 
 Any client that takes a JSON config (Cursor, Windsurf, a custom agent):
