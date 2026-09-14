@@ -53,6 +53,35 @@ openclaw mcp add mentionagent --url https://mentionagent.ai/mcp \
   --transport streamable-http --header "Authorization=Bearer MY_KEY"
 ```
 
+OpenCode, OAuth (in `opencode.json`; OpenCode registers itself and opens the consent page on first use, or run `opencode mcp auth mentionagent`; the two `permission` rules keep the sending tools on ask because OpenCode defaults to allow):
+
+```json
+{
+  "mcp": {
+    "mentionagent": { "type": "remote", "url": "https://mentionagent.ai/mcp", "enabled": true }
+  },
+  "permission": {
+    "mentionagent_approve_batch": "ask",
+    "mentionagent_send_reply": "ask"
+  }
+}
+```
+
+OpenCode, API key (`{env:NAME}` is OpenCode's substitution syntax):
+
+```json
+{
+  "mcp": {
+    "mentionagent": {
+      "type": "remote",
+      "url": "https://mentionagent.ai/mcp",
+      "oauth": false,
+      "headers": { "Authorization": "Bearer {env:MENTIONAGENT_API_KEY}" }
+    }
+  }
+}
+```
+
 Any client that takes a JSON config (Cursor, Windsurf, a custom agent):
 
 ```json

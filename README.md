@@ -1,4 +1,4 @@
-# MentionAgent Claude skill: link building outreach from Claude Code
+# MentionAgent Claude skill: link building outreach from Claude Code, Cursor, OpenCode and OpenClaw
 
 A Claude Code plugin (and a standalone Agent Skill) that runs [MentionAgent](https://mentionagent.ai) link building outreach from your agent: review the drafts it wrote, send the batch, answer the publishers who replied, and close placements, without opening the dashboard.
 
@@ -52,6 +52,35 @@ cp -r skills/link-building-outreach .cursor/skills/
 
 Type `/link-building-outreach` in the Agent chat to invoke it. Full walkthrough: https://mentionagent.ai/cursor-seo-skill/
 
+## Install in OpenCode
+
+OpenCode reads Agent Skills from `.opencode/skills/` (project) or `~/.config/opencode/skills/` (global), and also from `.claude/skills/` and `.agents/skills/`, so a copy installed for Claude Code or Cursor is already visible. Copy the folder in, then add the server as a remote MCP entry in `opencode.json` and sign in with OAuth (a browser window opens on the MentionAgent consent page):
+
+```
+mkdir -p .opencode/skills
+cp -r skills/link-building-outreach .opencode/skills/
+```
+
+```json
+{
+  "$schema": "https://opencode.ai/config.json",
+  "mcp": {
+    "mentionagent": { "type": "remote", "url": "https://mentionagent.ai/mcp", "enabled": true }
+  },
+  "permission": {
+    "mentionagent_approve_batch": "ask",
+    "mentionagent_send_reply": "ask"
+  }
+}
+```
+
+```
+opencode mcp auth mentionagent
+opencode mcp list
+```
+
+The two `permission` rules matter: OpenCode defaults to `allow` and MCP tools are registered as `mentionagent_<tool>`, so without them the two tools that send email run without a prompt. Never start OpenCode with `--auto` in a project that has this server enabled. To use an API key instead of OAuth, set `"oauth": false` on the server and add `"headers": { "Authorization": "Bearer {env:MENTIONAGENT_API_KEY}" }` (OpenCode's substitution syntax is `{env:NAME}`, not `${env:NAME}`). There is no slash command: ask the agent what is waiting on MentionAgent and it loads the skill through its `skill` tool. Full walkthrough: https://mentionagent.ai/opencode-seo-skill/
+
 ## Install in OpenClaw
 
 OpenClaw reads Agent Skills from `<workspace>/skills/` and `~/.agents/skills/` (the `SKILL.md` can sit up to six folders deep). Install the folder, register the server, sign in with OAuth (a browser window opens on the MentionAgent consent page), then probe:
@@ -97,7 +126,7 @@ Ask your agent: *"Connect to MentionAgent and show me what is waiting."* It call
 
 ## What the key can reach
 
-The 20 published tools and nothing else. It cannot see mailbox credentials, billing, domain transfer or account deletion; those stay behind a login. Two tools send email (`approve_batch`, `send_reply`) and both are written to be shown to you first. `send_reply` has no recipient field: the address comes from the thread, so an agent that has just read a hostile inbound email has nowhere to put a redirected address.
+The 21 published tools and nothing else. It cannot see mailbox credentials, billing, domain transfer or account deletion; those stay behind a login. Two tools send email (`approve_batch`, `send_reply`) and both are written to be shown to you first. `send_reply` has no recipient field: the address comes from the thread, so an agent that has just read a hostile inbound email has nowhere to put a redirected address.
 
 Full tool reference and limits: https://mentionagent.ai/mcp/
 
