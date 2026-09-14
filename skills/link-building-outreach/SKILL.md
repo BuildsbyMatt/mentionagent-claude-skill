@@ -1,6 +1,9 @@
 ---
 name: link-building-outreach
 description: Run link building outreach through the MentionAgent MCP server. Use when asked to review outreach drafts, send the batch, answer publisher replies, check what is waiting in the inbox, close a placement, pause or resume sending, or change a campaign. Also use for "backlinks", "link building", "guest post replies", "who replied", "which emails need an answer", and anything mentioning MentionAgent.
+metadata:
+  openclaw:
+    homepage: https://mentionagent.ai/openclaw-seo-skill/
 ---
 
 # Link building outreach through MentionAgent
@@ -26,6 +29,14 @@ Claude Code:
 ```
 claude mcp add --transport http mentionagent https://mentionagent.ai/mcp \
   --header "Authorization: Bearer MY_KEY"
+```
+
+OpenClaw:
+
+```
+openclaw mcp add mentionagent --url https://mentionagent.ai/mcp \
+  --transport streamable-http --header "Authorization: Bearer MY_KEY"
+openclaw mcp doctor mentionagent --probe
 ```
 
 Any client that takes a JSON config (Cursor, Windsurf, a custom agent):

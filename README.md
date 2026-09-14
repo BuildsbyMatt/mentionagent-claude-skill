@@ -52,6 +52,21 @@ cp -r skills/link-building-outreach .cursor/skills/
 
 Type `/link-building-outreach` in the Agent chat to invoke it. Full walkthrough: https://mentionagent.ai/cursor-seo-skill/
 
+## Install in OpenClaw
+
+OpenClaw reads Agent Skills from `<workspace>/skills/` and `~/.agents/skills/` (the `SKILL.md` can sit up to six folders deep). Copy the folder in, then register the server with the OpenClaw MCP client:
+
+```
+cp -r skills/link-building-outreach ~/.openclaw/workspace/skills/
+openclaw mcp add mentionagent \
+  --url https://mentionagent.ai/mcp \
+  --transport streamable-http \
+  --header "Authorization: Bearer ma_live_..."
+openclaw mcp doctor mentionagent --probe
+```
+
+`doctor` will flag the literal token; move it into OpenClaw's secret store if the Gateway is shared. The skill answers to `/link-building-outreach` in any connected channel. Full walkthrough: https://mentionagent.ai/openclaw-seo-skill/
+
 ## Install the skill on its own
 
 Copy `skills/link-building-outreach/` into `~/.claude/skills/` (personal) or `.claude/skills/` in a project, then connect the MCP server yourself:
