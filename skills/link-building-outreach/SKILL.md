@@ -22,9 +22,15 @@ Every tool comes from the MentionAgent MCP server at `https://mentionagent.ai/mc
 
 ## Connecting
 
-Ask the operator for their API key. Keys are created in the dashboard under Settings, Agent access, shown once, and look like `ma_live_...`. Keep the key out of any file that gets committed.
+The server accepts two credentials: an OAuth sign-in, or an API key sent as a bearer header. Prefer OAuth when the client supports it, because there is nothing to paste and nothing to leak. Otherwise ask the operator for their API key. Keys are created in the dashboard under Settings, Agent access, shown once, and look like `ma_live_...`. Keep the key out of any file that gets committed.
 
-Claude Code:
+Claude Code, OAuth (a browser window opens for the operator to sign in and click Allow):
+
+```
+claude mcp add --transport http mentionagent https://mentionagent.ai/mcp
+```
+
+Claude Code, API key:
 
 ```
 claude mcp add --transport http mentionagent https://mentionagent.ai/mcp \
@@ -55,7 +61,7 @@ Any client that takes a JSON config (Cursor, Windsurf, a custom agent):
 
 Then call `get_status` with no arguments, show the operator the sites on the account, and say plainly what you can and cannot do (the two sending tools, the two credit-spending tools, and the list under "Still needs the dashboard").
 
-The one-click custom connector in the Claude apps uses OAuth, which the server does not support. It is a bearer header or nothing.
+The Claude apps (web, desktop, mobile) connect through Settings, Connectors, Add custom connector: paste `https://mentionagent.ai/mcp`, leave the OAuth client ID empty, click Connect and sign in. Connected apps and keys are listed and revoked under Settings, Agent access.
 
 ## The daily loop
 
