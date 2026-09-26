@@ -2,7 +2,7 @@
 
 A Claude Code plugin (and a standalone Agent Skill) that runs [MentionAgent](https://mentionagent.ai) link building outreach from your agent: review the drafts it wrote, send the batch, answer the publishers who replied, and close placements, without opening the dashboard.
 
-It wraps the MentionAgent MCP server (`https://mentionagent.ai/mcp`, 26 tools) with a skill that knows the daily loop, which two tools send real email, which two spend credits, and where to stop and ask you.
+It wraps the MentionAgent MCP server (`https://mentionagent.ai/mcp`, 35 tools) with a skill that knows the daily loop, which two tools send real email, which two spend credits, and where to stop and ask you.
 
 Works in Claude Code, Cursor, Windsurf, or any MCP client that can set a request header.
 
@@ -126,7 +126,7 @@ Ask your agent: *"Connect to MentionAgent and show me what is waiting."* It call
 
 ## What the key can reach
 
-The 26 published tools and nothing else. It cannot see mailbox credentials, billing, domain transfer or account deletion; those stay behind a login. Two tools send email (`approve_batch`, `send_reply`) and both are written to be shown to you first. `send_reply` has no recipient field: the address comes from the thread, so an agent that has just read a hostile inbound email has nowhere to put a redirected address.
+The 35 published tools and nothing else. It cannot see mailbox credentials, billing, domain transfer or account deletion; those stay behind a login. Two tools send email (`approve_batch`, `send_reply`) and both are written to be shown to you first. `send_reply` has no recipient field: the address comes from the thread, so an agent that has just read a hostile inbound email has nowhere to put a redirected address.
 
 Full tool reference and limits: https://mentionagent.ai/mcp/
 

@@ -14,7 +14,7 @@ Every tool comes from the MentionAgent MCP server at `https://mentionagent.ai/mc
 
 ## The rules that never bend
 
-1. **Two tools send email: `approve_batch` and `send_reply`. Nothing else does.** Never call either until the operator has seen the exact text that will go out and has said yes in this conversation. "Send the good ones" is not consent for a specific draft; list them, then send the ones they name.
+1. **Two tools send email: `approve_batch` and `send_reply`. Nothing else does.** Never call either until the operator has seen the exact text that will go out and has said yes in this conversation. "Send the good ones" is not consent for a specific draft; list them, then send the ones they name. `set_run_settings` with `autoSend: true` is the one switch that lets future batches go out with no review at all: only on an explicit request from the operator, never as a convenience.
 2. **Two tools spend credits: `trigger_run` and `draft_reply`.** Say so before calling them. `trigger_run` is capped at five per site per rolling 24 hours and is refused while a batch is still waiting for approval, so do not loop on it.
 3. **Every write takes an id that came out of a read in the same conversation.** `batchId` comes from `list_pending_drafts`, `draftId` from `list_pending_drafts`, `conversationId` from `list_inbox` or `get_thread`, `jobId` from `draft_reply`, `changes` from `plan_campaign_change`. Never invent one and never reuse one from a previous session.
 4. **Every site tool wants an explicit `workspaceId`.** Get the list from `get_status` with no arguments. If the operator has more than one site and did not say which, ask. Do not pick one.
@@ -118,7 +118,7 @@ This is the sequence that does the most work in the fewest calls. Run it when th
 - the same phrasing repeated across several drafts
 - anything longer than about 90 words; short drafts get answered, long ones do not
 
-Fix a draft with `edit_draft` (`draftId`, new `subject` and `body`). Drop one with `discard_draft` (`draftId`). Then show the operator the count you are about to send and the list of subjects, and wait.
+Fix a draft with `edit_draft` (`draftId`, new `subject` and `body`). Drop one with `discard_draft` (`draftId`). If the operator wants none of them, `skip_batch` with the `batchId` throws the whole batch away and refunds a paying account's draft credits; the next run drafts a fresh one. Then show the operator the count you are about to send and the list of subjects, and wait.
 
 ### 3. Send once
 
@@ -144,6 +144,8 @@ Replies that need the operator, not you: anything with money in it (a quoted pri
 ### 5. Record what closed
 
 When a link is live, `mark_deal` with the `conversationId`. It closes the thread as won and records the agreed placement as done. **It sends no email**, so if the publisher is waiting to hear, `send_reply` first, then `mark_deal`.
+
+The nightly link checker's findings are in `list_links`: links it has seen live (and whether they are followed), links that have gone, deals marked won with no link found yet, and pages it could not read. For a page it could not read, ask the operator to look, then `answer_link` with the `conversationId` and `live: true` (closes the deal) or `live: false`. Never answer from a guess.
 
 Threads that are dealt with but not deals: `archive_thread`. It keeps `needs_reply` honest.
 
@@ -179,8 +181,11 @@ The profile, keywords and the page being linked to take exact values, so they ha
 
 - **Keywords** are the Google searches discovery runs to find sites. `list_keywords` pages through them (`contains` filters, `status` picks active or retired). `add_keywords` takes up to 25 searches of 2 to 9 words, typed the way someone would search ("vegan recipe blogs", "write for us fitness"); unsearched ones go first on the next run. `remove_keywords` takes exact text from `list_keywords` and keeps the pool above the minimum a run needs, so read its reply for anything it kept. To stop a whole kind of site ("no directories"), use `plan_campaign_change` rather than removing keywords one by one.
 - **The linked page**: `set_link_target` with `page` (a path like `/pricing`, a URL on the same site, or `""` for the homepage) and optionally `phrases`, up to 3 anchor phrases of up to 3 words. The page is fetched once and refused if it errors. It applies to drafts written from then on.
+- **Email settings**: `set_email_settings` with any of `offerTerms` (what the site offers in return, stated word for word; terms with a dash or a banned word are refused), `offerInFirstTouch`, `outreachGoal` (`link` or `mention`), `emailStyle` (`default` one-sided ask, `exchange` offers to feature them too), `pricingDetails` (the only figure emails may quote) and `fromName`.
+- **Run settings**: `set_run_settings` with any of `frequency`, `preferredHour` (UTC, -1 clears), `autoFollowup` and `autoSend` (see rule 1).
+- **Blocked domains**: `list_blocklist`, `block_domains` (a competitor, partner or client; each covers its subdomains) and `unblock_domains`. A site already emailed is never emailed again whether or not it is on the list.
 
-Confirm profile, keyword and page changes with the operator before making them, same as a plan.
+Confirm profile, settings, blocklist, keyword and page changes with the operator before making them, same as a plan.
 
 The pitch line cannot be changed from here. It goes into every first email word for word, so it stays in the dashboard, where the operator types the exact sentence.
 
@@ -188,7 +193,7 @@ The pitch line cannot be changed from here. It goes into every first email word 
 
 ## Reading sending health
 
-`get_sending_health` explains why sending is or is not moving: warmup progress, today's cap and how much of it is used, bounce rate, automatic pauses and the next scheduled run. If it reports an automatic pause after bounces, say so; lifting it is a deliberate manual step in the dashboard and no tool does it.
+`get_sending_health` explains why sending is or is not moving: warmup progress, today's cap and how much of it is used, bounce rate, automatic pauses and the next scheduled run. If it reports an automatic pause after bounces, say so and give the reason. `resume_sending` lifts it, but only once the operator has heard why it paused and asks for it; volume stays reduced while the bounce rate is high, and the next bounce pauses it again.
 
 ## Still needs the dashboard
 
@@ -197,7 +202,6 @@ Do not go looking for a tool for these. Tell the operator where they live instea
 - Adding a site, connecting a sending domain, setting up a mailbox
 - The pitch line
 - Billing, plans, invoices
-- Clearing a bounce pause
 - Deleting the account
 
 ## Limits worth knowing
@@ -206,6 +210,6 @@ Do not go looking for a tool for these. Tell the operator where they live instea
 - `get_attachment` returns images up to 4 MB, PDF and .docx text up to about 20,000 characters (longer files are cut with a marker), and refuses other file types by name.
 - Long messages are truncated with a marker naming the tool that returns the whole thing.
 - Roughly 1,500 requests per key per 15 minutes. Normal use is nowhere near it.
-- Reading works on any account, including one whose plan has ended. `trigger_run` and `plan_campaign_change` need an active plan or trial. `approve_batch` and `send_reply` need an active paid plan.
+- Reading works on any account, including one whose plan has ended. `trigger_run` and `plan_campaign_change` need an active plan or trial. `approve_batch` and `send_reply` need an active paid plan, and so do `resume_sending` and turning `autoSend` on.
 
 Full tool reference: https://mentionagent.ai/mcp/
