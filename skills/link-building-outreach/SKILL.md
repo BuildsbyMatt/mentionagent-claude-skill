@@ -169,16 +169,18 @@ Match the register of the thread. Publishers are people running a small site, mo
 
 ## Changing a campaign
 
-`get_campaign` shows what a site is saying, the page it links to, its standing negotiation rules, email wording notes, caps, quiet hours and keywords. Most of it can be changed in plain English in two steps: `plan_campaign_change` with `workspaceId` and a `change` sentence returns a `changes` array describing exactly what would move and writes nothing; `apply_campaign_change` with that array unmodified makes it so. Always show the plan before applying.
+`get_campaign` shows what a site is saying, its profile (niche, competitors, differentiator, audiences), the page it links to, its standing negotiation rules, email wording notes, caps, quiet hours and keywords. Most of it can be changed in plain English in two steps: `plan_campaign_change` with `workspaceId` and a `change` sentence returns a `changes` array describing exactly what would move and writes nothing; `apply_campaign_change` with that array unmodified makes it so. Always show the plan before applying.
 
 What can be changed this way: who to target, sending days, countries, quiet hours, drafts per run, the answer when a site asks to be paid, the negotiation rules ("we accept 2:1 exchanges when their domain is stronger", "no calls, keep it on email"), and the email wording notes ("always include our URL", "sign off with Greetings", "write in German"). Rules and wording notes are rewritten as a whole each time, so the plan shows the full new text; check nothing the operator still wants was dropped. Wording notes shape the outreach emails, negotiation rules shape replies; a request about what the emails say is a wording note, not a rule.
 
-Keywords and the page being linked to take exact values, so they have their own tools instead of going through the plan:
+The profile, keywords and the page being linked to take exact values, so they have their own tools instead of going through the plan:
+
+- **The profile** is what every email is written from: `set_profile` with any of `niche`, `competitors`, `differentiator` and `audiences`. Pass only the fields to change. `competitors` and `audiences` replace the whole list, so take the current list from `get_campaign`, edit it, and pass all of it back; passing one new audience on its own would wipe the others. Up to 20 of each. A new kind of customer ("we also sell to agencies") is an audience here, not a targeting steer. The website cannot be changed.
 
 - **Keywords** are the Google searches discovery runs to find sites. `list_keywords` pages through them (`contains` filters, `status` picks active or retired). `add_keywords` takes up to 25 searches of 2 to 9 words, typed the way someone would search ("vegan recipe blogs", "write for us fitness"); unsearched ones go first on the next run. `remove_keywords` takes exact text from `list_keywords` and keeps the pool above the minimum a run needs, so read its reply for anything it kept. To stop a whole kind of site ("no directories"), use `plan_campaign_change` rather than removing keywords one by one.
 - **The linked page**: `set_link_target` with `page` (a path like `/pricing`, a URL on the same site, or `""` for the homepage) and optionally `phrases`, up to 3 anchor phrases of up to 3 words. The page is fetched once and refused if it errors. It applies to drafts written from then on.
 
-Confirm keyword and page changes with the operator before making them, same as a plan.
+Confirm profile, keyword and page changes with the operator before making them, same as a plan.
 
 The pitch line cannot be changed from here. It goes into every first email word for word, so it stays in the dashboard, where the operator types the exact sentence.
 
