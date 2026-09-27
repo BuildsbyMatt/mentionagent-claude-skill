@@ -69,7 +69,8 @@ cp -r skills/link-building-outreach .opencode/skills/
   },
   "permission": {
     "mentionagent_approve_batch": "ask",
-    "mentionagent_send_reply": "ask"
+    "mentionagent_send_reply": "ask",
+    "mentionagent_redirect_thread": "ask"
   }
 }
 ```
@@ -79,7 +80,7 @@ opencode mcp auth mentionagent
 opencode mcp list
 ```
 
-The two `permission` rules matter: OpenCode defaults to `allow` and MCP tools are registered as `mentionagent_<tool>`, so without them the two tools that send email run without a prompt. Never start OpenCode with `--auto` in a project that has this server enabled. To use an API key instead of OAuth, set `"oauth": false` on the server and add `"headers": { "Authorization": "Bearer {env:MENTIONAGENT_API_KEY}" }` (OpenCode's substitution syntax is `{env:NAME}`, not `${env:NAME}`). There is no slash command: ask the agent what is waiting on MentionAgent and it loads the skill through its `skill` tool. Full walkthrough: https://mentionagent.ai/opencode-seo-skill/
+The `permission` rules matter: OpenCode defaults to `allow` and MCP tools are registered as `mentionagent_<tool>`, so without them the two tools that send email, and `redirect_thread`, which opens a thread to an address taken from an email, run without a prompt. Never start OpenCode with `--auto` in a project that has this server enabled. To use an API key instead of OAuth, set `"oauth": false` on the server and add `"headers": { "Authorization": "Bearer {env:MENTIONAGENT_API_KEY}" }` (OpenCode's substitution syntax is `{env:NAME}`, not `${env:NAME}`). There is no slash command: ask the agent what is waiting on MentionAgent and it loads the skill through its `skill` tool. Full walkthrough: https://mentionagent.ai/opencode-seo-skill/
 
 ## Install in OpenClaw
 
