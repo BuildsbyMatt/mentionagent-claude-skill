@@ -126,7 +126,7 @@ Ask your agent: *"Connect to MentionAgent and show me what is waiting."* It call
 
 ## What the key can reach
 
-The 35 published tools and nothing else. It cannot see mailbox credentials, billing, domain transfer or account deletion; those stay behind a login. Two tools send email (`approve_batch`, `send_reply`) and both are written to be shown to you first. `send_reply` has no recipient field: the address comes from the thread, so an agent that has just read a hostile inbound email has nowhere to put a redirected address.
+The 35 published tools and nothing else. It cannot see mailbox credentials, billing, domain transfer or account deletion; those stay behind a login. Two tools send email (`approve_batch`, `send_reply`) and both are written to be shown to you first. `send_reply` has no recipient field: the address comes from the thread. The one tool that takes an address is `redirect_thread`. It sends nothing itself, but it opens a thread to that address, and `send_reply` on the new thread writes to it. That address usually comes from an inbound email, so the skill shows it to you, with the sentence it came from, and waits for you to confirm before redirecting. `set_run_settings` with `autoSend: true` lets future batches go out with no review; the skill only sets it when you ask for it.
 
 Full tool reference and limits: https://mentionagent.ai/mcp/
 
