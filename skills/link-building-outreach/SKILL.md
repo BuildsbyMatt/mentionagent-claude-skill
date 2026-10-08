@@ -145,7 +145,7 @@ Replies that need the operator, not you: anything with money in it (a quoted pri
 
 When a link is live, `mark_deal` with the `conversationId`. It closes the thread as won and records the agreed placement as done. **It sends no email**, so if the publisher is waiting to hear, `send_reply` first, then `mark_deal`.
 
-The nightly link checker's findings are in `list_links`: links it has seen live (and whether they are followed), links that have gone, deals marked won with no link found yet, and pages it could not read. For a page it could not read, ask the operator to look, then `answer_link` with the `conversationId` and `live: true` (closes the deal) or `live: false`. Never answer from a guess.
+The nightly link checker's findings are in `list_links`: links it has seen live (and whether they are followed), links that have gone, deals marked won with no link found yet, and pages it could not read. For a page it could not read, ask the operator to look, then `answer_link` with the `conversationId` and `live: true` (closes the deal) or `live: false`. Never answer from a guess. A live link marked as owing our link back means the checker thinks the deal was a swap; if it was not (a paid placement, a free mention), and the operator or the thread says so, call `answer_link` with `noLinkBackOwed: true` instead of `live`. That clears the flag and closes the deal.
 
 Threads that are dealt with but not deals: `archive_thread`. It keeps `needs_reply` honest.
 
