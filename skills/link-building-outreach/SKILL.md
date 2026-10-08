@@ -191,6 +191,8 @@ The pitch line cannot be changed from here. It goes into every first email word 
 
 `set_sending` with `enabled: false` stops new outreach for a site. It is never blocked, whatever the billing state, so if the operator says "stop", stop first and ask questions after.
 
+`set_warmup` pauses or resumes the inbox warmup, which is not outreach: pausing it does not stop emails to prospects, so when the operator wants everything quiet, call `set_sending` as well. Pausing is never blocked. Before pausing a young inbox, mention that a long warmup pause can cost deliverability when outreach resumes.
+
 ## Reading sending health
 
 `get_sending_health` explains why sending is or is not moving: warmup progress, today's cap and how much of it is used, bounce rate, automatic pauses and the next scheduled run. If it reports an automatic pause after bounces, say so and give the reason. `resume_sending` lifts it, but only once the operator has heard why it paused and asks for it; volume stays reduced while the bounce rate is high, and the next bounce pauses it again.
