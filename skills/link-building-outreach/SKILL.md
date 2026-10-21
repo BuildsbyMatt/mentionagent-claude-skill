@@ -67,7 +67,7 @@ OpenCode, OAuth (in `opencode.json`; OpenCode registers itself and opens the con
 }
 ```
 
-OpenCode, API key (`{env:NAME}` is OpenCode's substitution syntax):
+OpenCode, API key (replace `MY_KEY` with the operator's key):
 
 ```json
 {
@@ -76,7 +76,7 @@ OpenCode, API key (`{env:NAME}` is OpenCode's substitution syntax):
       "type": "remote",
       "url": "https://mentionagent.ai/mcp",
       "oauth": false,
-      "headers": { "Authorization": "Bearer {env:MENTIONAGENT_API_KEY}" }
+      "headers": { "Authorization": "Bearer MY_KEY" }
     }
   }
 }
