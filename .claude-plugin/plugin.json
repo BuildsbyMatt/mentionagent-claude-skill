@@ -8,6 +8,9 @@
   },
   "homepage": "https://mentionagent.ai/claude-seo-skill/",
   "privacyPolicyUrl": "https://mentionagent.ai/privacy/",
+  "termsOfServiceUrl": "https://mentionagent.ai/terms/",
+  "supportUrl": "https://mentionagent.ai/mcp/",
+  "documentationUrl": "https://mentionagent.ai/mcp/",
   "repository": "https://github.com/BuildsbyMatt/mentionagent-claude-skill",
   "license": "MIT",
   "keywords": [
