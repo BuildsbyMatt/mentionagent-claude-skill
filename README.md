@@ -22,13 +22,9 @@ claude plugin marketplace add BuildsbyMatt/mentionagent-claude-skill
 claude plugin install mentionagent@mentionagent-claude-skill
 ```
 
-Then set your API key in the environment the agent runs in:
+Then sign in: run `/mcp` in Claude Code, pick `mentionagent` and choose Authenticate. A browser window opens on the MentionAgent consent page, you click Allow, and there is no key to paste or store. The connection is listed and revoked in the dashboard under Settings, Agent access.
 
-```
-export MENTIONAGENT_API_KEY=ma_live_...
-```
-
-The plugin's `.mcp.json` reads `${MENTIONAGENT_API_KEY}`, so the key never lands in a file. Keys are created in the MentionAgent dashboard under Settings, Agent access, and are shown once.
+Prefer an API key (a headless box, CI)? Add the server by hand with a bearer header instead, as under "Install the skill on its own" below. Keys are created under Settings, Agent access and are shown once.
 
 ## Install in Cursor
 
@@ -135,7 +131,7 @@ Full tool reference and limits: https://mentionagent.ai/mcp/
 
 ```
 .claude-plugin/plugin.json          plugin manifest
-.mcp.json                           the MentionAgent MCP server, key from ${MENTIONAGENT_API_KEY}
+.mcp.json                           the MentionAgent MCP server, OAuth sign-in
 skills/link-building-outreach/      the skill (SKILL.md)
 ```
 
