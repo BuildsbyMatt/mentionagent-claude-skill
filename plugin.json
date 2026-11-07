@@ -1,0 +1,23 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "mentionagent",
+  "version": "1.2.0",
+  "description": "Link building outreach from your agent: review MentionAgent's outreach drafts, send the batch, answer publisher replies and close placements without opening the dashboard.",
+  "author": {
+    "name": "MentionAgent",
+    "url": "https://mentionagent.ai"
+  },
+  "homepage": "https://mentionagent.ai/mcp/",
+  "repository": "https://github.com/BuildsbyMatt/mentionagent-claude-skill",
+  "license": "MIT",
+  "keywords": ["seo", "link-building", "outreach", "backlinks", "mcp"],
+  "extensions": {
+    "com.nousresearch.hermes": {
+      "servers": {
+        "mentionagent": {
+          "trust": "untrusted"
+        }
+      }
+    }
+  }
+}

@@ -1,6 +1,6 @@
 {
   "name": "mentionagent",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "Link building outreach from Claude Code: review MentionAgent's drafts, send the batch, answer publisher replies and close placements without opening the dashboard.",
   "author": {
     "name": "MentionAgent",
