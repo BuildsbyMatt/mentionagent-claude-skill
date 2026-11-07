@@ -1,4 +1,4 @@
-# MentionAgent Claude skill: link building outreach from Claude Code, Hermes Agent, Cursor, OpenCode and OpenClaw
+# MentionAgent Claude skill: link building outreach from Claude Code, Hermes Agent, Antigravity, Cursor, OpenCode and OpenClaw
 
 A Claude Code plugin (and a standalone Agent Skill) that runs [MentionAgent](https://mentionagent.ai) link building outreach from your agent: review the drafts it wrote, send the batch, answer the publishers who replied, and close placements, without opening the dashboard.
 
@@ -134,6 +134,16 @@ mcp_servers:
 
 Put `MENTIONAGENT_API_KEY=ma_live_...` in `~/.hermes/.env`. The key works like a password for your MentionAgent account, so don't paste it into a chat.
 
+## Install in Antigravity CLI
+
+```bash
+agy plugin install https://github.com/BuildsbyMatt/mentionagent-claude-skill
+```
+
+The plugin brings the skill and the MentionAgent server (`mcp_config.json`, Streamable HTTP). There is no key to paste: the first time a tool runs, Antigravity registers itself with MentionAgent's sign-in service, your browser opens the MentionAgent consent page, and you click Allow. In the Antigravity App the same sign-in sits behind the Authenticate button on the Customizations page. The connection is listed and revoked in the dashboard under Settings, Agent access.
+
+To use an API key instead, add `"headers": { "Authorization": "Bearer ${MENTIONAGENT_API_KEY}" }` to the `mentionagent` entry in your own `mcp_config.json`.
+
 ## Install the skill on its own
 
 Copy `skills/link-building-outreach/` into `~/.claude/skills/` (personal) or `.claude/skills/` in a project, then connect the MCP server yourself:
@@ -174,6 +184,8 @@ Full tool reference and limits: https://mentionagent.ai/mcp/
 .mcp.json                           the MentionAgent MCP server for Claude Code, OAuth sign-in
 plugin.json                         Agent Plugins v1 manifest (Hermes Agent)
 mcp.json                            the MentionAgent MCP server for Hermes, OAuth through mcp-remote
+.antigravity-plugin/plugin.json     Antigravity plugin manifest
+mcp_config.json                     the MentionAgent MCP server for Antigravity, OAuth sign-in
 skills/link-building-outreach/      the skill (SKILL.md)
 ```
 

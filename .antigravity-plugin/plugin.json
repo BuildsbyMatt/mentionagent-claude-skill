@@ -1,0 +1,22 @@
+{
+  "$schema": "https://antigravity.google/schemas/v1/plugin.json",
+  "name": "mentionagent",
+  "displayName": "MentionAgent",
+  "description": "Link building outreach from your agent: review MentionAgent's outreach drafts, send the batch, answer publisher replies and close placements without opening the dashboard.",
+  "version": "1.2.0",
+  "logo": ".claude-plugin/icon.png",
+  "author": {
+    "name": "MentionAgent",
+    "email": "support@mentionagent.ai",
+    "url": "https://mentionagent.ai"
+  },
+  "homepage": "https://mentionagent.ai/mcp/",
+  "repository": "https://github.com/BuildsbyMatt/mentionagent-claude-skill",
+  "license": "MIT",
+  "keywords": ["seo", "link-building", "outreach", "backlinks", "mcp"],
+  "suggestedPrompts": [
+    "Connect to MentionAgent and show me what is waiting",
+    "Review today's outreach drafts and flag the ones that look wrong",
+    "Which publisher replies need an answer?"
+  ]
+}
