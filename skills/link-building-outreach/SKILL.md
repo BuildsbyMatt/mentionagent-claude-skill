@@ -2,8 +2,7 @@
 name: link-building-outreach
 description: Run link building outreach through the MentionAgent MCP server. Use when asked to review outreach drafts, send the batch, answer publisher replies, check what is waiting in the inbox, close a placement, pause or resume sending, or change a campaign. Also use for "backlinks", "link building", "guest post replies", "who replied", "which emails need an answer", and anything mentioning MentionAgent.
 metadata:
-  openclaw:
-    homepage: https://mentionagent.ai/openclaw-seo-skill/
+  homepage: https://mentionagent.ai/openclaw-seo-skill/
 ---
 
 # Link building outreach through MentionAgent
