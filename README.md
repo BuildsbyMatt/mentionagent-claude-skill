@@ -88,10 +88,10 @@ The `permission` rules matter: OpenCode defaults to `allow` and MCP tools are re
 
 ## Install in OpenClaw
 
-OpenClaw reads Agent Skills from `<workspace>/skills/` and `~/.agents/skills/` (the `SKILL.md` can sit up to six folders deep). Install the folder, register the server, sign in with OAuth (a browser window opens on the MentionAgent consent page), then probe:
+The skill is on [ClawHub](https://clawhub.ai/BuildsbyMatt/skills/link-building-outreach). Install it, register the server, sign in with OAuth (a browser window opens on the MentionAgent consent page), then probe:
 
 ```
-openclaw skills install ./skills/link-building-outreach
+openclaw skills install @buildsbymatt/link-building-outreach
 openclaw mcp add mentionagent \
   --url https://mentionagent.ai/mcp \
   --transport streamable-http \
@@ -99,6 +99,8 @@ openclaw mcp add mentionagent \
 openclaw mcp login mentionagent
 openclaw mcp probe mentionagent
 ```
+
+To install from a clone of this repo instead, run `openclaw skills install ./skills/link-building-outreach`. OpenClaw reads skills from `<workspace>/skills/` and `~/.agents/skills/`, and the `SKILL.md` can sit up to six folders deep.
 
 To use an API key instead of OAuth, drop `--auth oauth` and pass `--header "Authorization=Bearer ma_live_..."` (the flag takes `KEY=VALUE`; a colon is rejected). `openclaw mcp doctor` will then flag the literal token, which is the reason to prefer OAuth on a shared Gateway. The skill answers to `/link-building-outreach` in any connected channel. Full walkthrough: https://mentionagent.ai/openclaw-seo-skill/
 
