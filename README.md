@@ -15,6 +15,14 @@ Works in Claude Code, Cursor, Windsurf, or any MCP client that can set a request
 - **Closes the loop**: records a placement as done once the link is live.
 - **Campaign changes in plain English**, shown as a plan before anything moves.
 
+## Install in any agent with one command
+
+```
+npx skills add BuildsbyMatt/mentionagent-claude-skill
+```
+
+The [skills CLI](https://github.com/vercel-labs/skills) finds the agents on your machine (Claude Code, Codex, Cursor, OpenCode, Gemini CLI and others) and copies the skill into each one you pick. It installs the skill, not the server connection. Connect the MCP server once in that agent too: the skill walks your agent through it on first use, or follow that agent's section below.
+
 ## Install as a Claude Code plugin
 
 ```

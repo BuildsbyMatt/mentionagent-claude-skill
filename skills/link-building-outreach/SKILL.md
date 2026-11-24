@@ -52,6 +52,12 @@ openclaw mcp add mentionagent --url https://mentionagent.ai/mcp \
   --transport streamable-http --header "Authorization=Bearer MY_KEY"
 ```
 
+Codex, OAuth (Codex finds the sign-in and opens the consent page in a browser; the CLI and the IDE extension share this setup; if the sign-in expires, run `codex mcp login mentionagent`):
+
+```
+codex mcp add mentionagent --url https://mentionagent.ai/mcp
+```
+
 OpenCode, OAuth (in `opencode.json`; OpenCode registers itself and opens the consent page on first use, or run `opencode mcp auth mentionagent`; the two `permission` rules keep the sending tools on ask because OpenCode defaults to allow):
 
 ```json
