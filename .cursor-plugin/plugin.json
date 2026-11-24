@@ -1,0 +1,16 @@
+{
+  "name": "mentionagent",
+  "displayName": "MentionAgent",
+  "version": "1.2.0",
+  "description": "Link building outreach from Cursor: review the outreach drafts MentionAgent wrote, send the batch you approved, answer publisher replies and close placements without opening the dashboard.",
+  "author": {
+    "name": "MentionAgent",
+    "email": "support@mentionagent.ai"
+  },
+  "homepage": "https://mentionagent.ai/cursor-seo-skill/",
+  "repository": "https://github.com/BuildsbyMatt/mentionagent-claude-skill",
+  "license": "MIT",
+  "keywords": ["seo", "link-building", "outreach", "backlinks", "mcp"],
+  "logo": "assets/logo.png",
+  "mcpServers": ".cursor-plugin/mcp.json"
+}
