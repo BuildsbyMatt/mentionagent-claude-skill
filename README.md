@@ -1,10 +1,10 @@
-# MentionAgent Claude skill: link building outreach from Claude Code, Hermes Agent, Antigravity, Cursor, OpenCode and OpenClaw
+# MentionAgent skill: link building outreach from Claude Code, Cursor, Codex, OpenClaw, Hermes Agent, Grok Build and other agents
 
 A Claude Code plugin (and a standalone Agent Skill) that runs [MentionAgent](https://mentionagent.ai) link building outreach from your agent: review the drafts it wrote, send the batch, answer the publishers who replied, and close placements, without opening the dashboard.
 
 It wraps the MentionAgent MCP server (`https://mentionagent.ai/mcp`, 38 tools) with a skill that knows the daily loop, which two tools send real email, which two spend credits, and where to stop and ask you.
 
-Works in Claude Code, Cursor, Windsurf, or any MCP client that can set a request header.
+Works in Claude Code, Cursor, Codex, OpenClaw, OpenCode, Hermes Agent, Antigravity, Grok Build, Gemini CLI, Windsurf, or any MCP client that signs in with OAuth or can set a request header.
 
 ## What it does
 
@@ -152,7 +152,24 @@ agy plugin install https://github.com/BuildsbyMatt/mentionagent-claude-skill
 
 The plugin brings the skill and the MentionAgent server (`mcp_config.json`, Streamable HTTP). There is no key to paste: the first time a tool runs, Antigravity registers itself with MentionAgent's sign-in service, your browser opens the MentionAgent consent page, and you click Allow. In the Antigravity App the same sign-in sits behind the Authenticate button on the Customizations page. The connection is listed and revoked in the dashboard under Settings, Agent access.
 
-To use an API key instead, add `"headers": { "Authorization": "Bearer ${MENTIONAGENT_API_KEY}" }` to the `mentionagent` entry in your own `mcp_config.json`.
+To use an API key instead, add `"headers": { "Authorization": "Bearer ma_live_..." }` to the `mentionagent` entry in your own `mcp_config.json`.
+
+## Install in Grok Build
+
+Add this repo as a plugin marketplace, then install the plugin. It bundles the skill and the hosted server, and the first tool call opens a browser on the MentionAgent consent page (OAuth, no key in config):
+
+```
+grok plugin marketplace add BuildsbyMatt/mentionagent-claude-skill
+grok plugin install mentionagent
+```
+
+## Install in Gemini CLI
+
+The repo is a Gemini CLI extension (`gemini-extension.json` plus the skill). Gemini CLI opens a browser to sign in on first use:
+
+```
+gemini extensions install https://github.com/BuildsbyMatt/mentionagent-claude-skill
+```
 
 ## Install the skill on its own
 
@@ -196,6 +213,10 @@ plugin.json                         Agent Plugins v1 manifest (Hermes Agent)
 mcp.json                            the MentionAgent MCP server for Hermes, OAuth through mcp-remote
 .antigravity-plugin/plugin.json     Antigravity plugin manifest
 mcp_config.json                     the MentionAgent MCP server for Antigravity, OAuth sign-in
+.cursor-plugin/plugin.json          Cursor plugin manifest, MCP server in .cursor-plugin/mcp.json
+.grok-plugin/                       Grok Build plugin and marketplace manifests
+gemini-extension.json               Gemini CLI extension manifest
+assets/logo.png                     plugin logo
 skills/link-building-outreach/      the skill (SKILL.md)
 ```
 

@@ -1,0 +1,19 @@
+{
+  "name": "mentionagent-claude-skill",
+  "description": "MentionAgent link building outreach for AI agents",
+  "owner": {
+    "name": "MentionAgent",
+    "email": "support@mentionagent.ai"
+  },
+  "plugins": [
+    {
+      "name": "mentionagent",
+      "description": "Review MentionAgent outreach drafts, send the batch, answer publisher replies and close placements from Grok Build.",
+      "category": "productivity",
+      "source": { "type": "local", "path": "./" },
+      "homepage": "https://mentionagent.ai/mcp/",
+      "keywords": ["seo", "link-building", "outreach", "backlinks"],
+      "domains": ["mentionagent.ai"]
+    }
+  ]
+}

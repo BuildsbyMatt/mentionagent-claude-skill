@@ -1,0 +1,22 @@
+{
+  "name": "mentionagent",
+  "version": "1.2.0",
+  "description": "Link building outreach from your agent: review MentionAgent's outreach drafts, send the batch you approved, answer publisher replies and close placements without opening the dashboard.",
+  "author": {
+    "name": "MentionAgent",
+    "email": "support@mentionagent.ai",
+    "url": "https://mentionagent.ai"
+  },
+  "homepage": "https://mentionagent.ai/mcp/",
+  "repository": "https://github.com/BuildsbyMatt/mentionagent-claude-skill",
+  "license": "MIT",
+  "logo": "assets/logo.png",
+  "keywords": ["seo", "link-building", "outreach", "backlinks", "mcp"],
+  "skills": ["./skills/link-building-outreach"],
+  "mcpServers": {
+    "mentionagent": {
+      "type": "http",
+      "url": "https://mentionagent.ai/mcp"
+    }
+  }
+}

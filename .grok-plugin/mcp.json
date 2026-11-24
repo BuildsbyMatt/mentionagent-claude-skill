@@ -1,0 +1,6 @@
+{
+  "mentionagent": {
+    "type": "http",
+    "url": "https://mentionagent.ai/mcp"
+  }
+}

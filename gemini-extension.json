@@ -1,0 +1,10 @@
+{
+  "name": "mentionagent",
+  "version": "1.2.0",
+  "description": "MentionAgent link building outreach: review the outreach drafts MentionAgent wrote, send the batch you approved, answer publisher replies and close placements. Bundles the link-building-outreach skill and the hosted MentionAgent MCP server (OAuth sign-in in the browser, no key in config).",
+  "mcpServers": {
+    "mentionagent": {
+      "httpUrl": "https://mentionagent.ai/mcp"
+    }
+  }
+}
